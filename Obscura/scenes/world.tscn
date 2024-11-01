@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://88du8yjefx8j"]
+[gd_scene load_steps=15 format=4 uid="uid://88du8yjefx8j"]
 
 [ext_resource type="PackedScene" uid="uid://dtm13sp1jsrwi" path="res://scenes/vessel.tscn" id="1_oaql3"]
 [ext_resource type="Script" path="res://scripts/camera_selector.gd" id="2_qffo5"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/camera_controllers/auto_scroll.gd" id="6_7dyq7"]
 [ext_resource type="Script" path="res://scripts/camera_controllers/position_lock_lerp.gd" id="7_6m5qd"]
 [ext_resource type="Script" path="res://scripts/camera_controllers/position_lock_lerp_target_foucs.gd" id="8_kgboq"]
+[ext_resource type="Script" path="res://scripts/camera_controllers/four_way_speedup_pushzone.gd" id="9_q5rth"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_63hpc"]
 _surfaces = [{
@@ -43,7 +44,7 @@ motion_mode = 1
 
 [node name="CameraSelector" type="Node" parent="." node_paths=PackedStringArray("cameras")]
 script = ExtResource("2_qffo5")
-cameras = [NodePath("../PositionLockLerpTargetFocusCamera")]
+cameras = [NodePath("../PositionLockCamera"), NodePath("../AutoScrollCamera"), NodePath("../PositionLockLerpCamera"), NodePath("../PositionLockLerpTargetFocusCamera"), NodePath("../FourWaySpeedupPushZoneCamera")]
 
 [node name="PositionLockCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_ttnp6")]
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 30, 0)
@@ -123,6 +124,25 @@ hyper_leash_distance = 10.0
 target = NodePath("../Vessel")
 
 [node name="debug" type="Label" parent="PositionLockLerpTargetFocusCamera"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("3_4fllx")
+
+[node name="FourWaySpeedupPushZoneCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_ttnp6")]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 30, 0)
+size = 50.0
+script = ExtResource("9_q5rth")
+push_ratio = 0.5
+pushbox_top_left = Vector2(-10, 10)
+pushbox_bottom_right = Vector2(10, -10)
+speedup_zone_top_left = Vector2(-5, 5)
+speedup_zone_bottom_right = Vector2(5, -5)
+max_camera_speed = 10.0
+target = NodePath("../Vessel")
+draw_camera_logic = true
+
+[node name="debug" type="Label" parent="FourWaySpeedupPushZoneCamera"]
 visible = false
 offset_right = 40.0
 offset_bottom = 23.0
