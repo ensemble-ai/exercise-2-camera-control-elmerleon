@@ -44,6 +44,7 @@ func _process(delta: float) -> void:
 
 
 func draw_logic() -> void:
+	
 	var mesh_instance := MeshInstance3D.new()
 	var immediate_mesh := ImmediateMesh.new()
 	var material := ORMMaterial3D.new()

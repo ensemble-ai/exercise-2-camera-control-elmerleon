@@ -138,9 +138,8 @@ pushbox_top_left = Vector2(-10, 10)
 pushbox_bottom_right = Vector2(10, -10)
 speedup_zone_top_left = Vector2(-5, 5)
 speedup_zone_bottom_right = Vector2(5, -5)
-max_camera_speed = 10.0
+max_camera_speed = 50.0
 target = NodePath("../Vessel")
-draw_camera_logic = true
 
 [node name="debug" type="Label" parent="FourWaySpeedupPushZoneCamera"]
 visible = false

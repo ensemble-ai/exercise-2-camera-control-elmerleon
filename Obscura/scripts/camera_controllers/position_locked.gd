@@ -27,6 +27,7 @@ func _process(delta: float) -> void:
 	super(delta)
 
 func draw_logic() -> void:
+	
 	var mesh_instance := MeshInstance3D.new()
 	var immediate_mesh := ImmediateMesh.new()
 	var material := ORMMaterial3D.new()
@@ -47,7 +48,7 @@ func draw_logic() -> void:
 	immediate_mesh.surface_add_vertex(Vector3(left, 0, bottom-5))
 	
 	
-	
+
 	immediate_mesh.surface_end()
 
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
